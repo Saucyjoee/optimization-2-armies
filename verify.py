@@ -1,3 +1,6 @@
+import numpy as np
+import scipy
+
 count = 0
 
 strategy = []
@@ -7,5 +10,14 @@ for x in range(0, 8):
         strategy.append([x,y, 7-(x+y)])
         count += 1
 
+
+
 print(count)
 print(strategy)
+
+def winner(num):
+    return -1 if num < 0 else 0 if num == 0 else 1
+
+payoff = np.matrix([[sum([winner(strategy[y][i] - strategy[x][i]) for i in range(3)]) for y in range(36)] for x in range(36)])
+
+print(payoff)
