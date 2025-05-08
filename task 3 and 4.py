@@ -17,11 +17,17 @@ print(count)
 print(strategy)
 
 def winner(num):
-    return -1 if num < 0 else 0 if num == 0 else 1
+    return -1. if num < 0. else 0. if num == 0. else 1.
 
 payoff = np.array([[sum([winner(strategy[y][i] - strategy[x][i]) for i in range(3)]) for y in range(36)] for x in range(36)])
 
 print(payoff)
+
+def apply_strategy(M, Probs):
+    #Probs is a list of size equal to the total strategy's
+    for p in range(len(Probs)):
+        M[p] *= Probs[p]
+    return M
 
 # La modelling
 
@@ -53,5 +59,6 @@ if res.success:
     game_value = res.x[-1]
     print("Optimal strategy for Antigonus:", optimal_strategy)
     print("Game value (expected payoff):", game_value)
+    print(sum(sum(apply_strategy(payoff, optimal_strategy))) / count) # v
 else:
     print("LP failed:", res.message)
