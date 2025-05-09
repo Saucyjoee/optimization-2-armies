@@ -2,9 +2,10 @@ from scipy.optimize import linprog
 import numpy as np
 import scipy
 import sys
+import matplotlib.pyplot as plt
 np.set_printoptions(threshold=sys.maxsize)
 
-legions = 7
+legions = 14
 
 count = 0
 
@@ -25,6 +26,8 @@ def winner(num):
 
 payoff = np.array([[sum([winner(strategy[y][i] - strategy[x][i]) for i in range(3)]) for y in range(count)] for x in range(count)])
 
+plt.imshow(payoff)
+plt.show()
 
 def apply_strategy(M, Probs):
     #Probs is a list of size equal to the total strategy's
